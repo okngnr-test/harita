@@ -1,0 +1,40 @@
+{
+	"lines": [
+		{
+			"startLatitude" : "41.176575",
+			"startLongitude" : "28.985337",
+			"endLatitude" : "41.175781",
+			"endLongitude" : "28.983143"
+		},
+		{
+			"startLatitude" : "41.176956",
+			"startLongitude" : "28.98505",
+			"endLatitude" : "41.176397",
+			"endLongitude" : "28.984804"
+		},
+		{
+			"startLatitude" : "41.17696",
+			"startLongitude" : "28.984358",
+			"endLatitude" : "41.176389",
+			"endLongitude" : "28.984774"
+		},
+		{
+			"startLatitude" : "41.176938",
+			"startLongitude" : "28.983135",
+			"endLatitude" : "41.176389",
+			"endLongitude" : "28.984774"
+		},
+		{
+			"startLatitude" : "41.175773",
+			"startLongitude" : "28.984369",
+			"endLatitude" : "41.176389",
+			"endLongitude" : "28.984774"
+		},
+		{
+			"startLatitude" : "41.175836",
+			"startLongitude" : "28.984989",
+			"endLatitude" : "41.176389",
+			"endLongitude" : "28.984774"
+		},
+	]
+}

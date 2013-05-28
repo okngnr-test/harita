@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=320, target-densitydpi=medium-dpi" />
+        
+        <title>Hello World</title>
+		<style type="text/css">
+			body{
+				padding:0;
+				padding-top:50px;
+				margin:0;
+			}
+			header{
+				width:100%;
+				height:50px;
+				background-image: linear-gradient(bottom, rgb(31,67,105) 4%, rgb(36,96,133) 52%);
+				background-image: -o-linear-gradient(bottom, rgb(31,67,105) 4%, rgb(36,96,133) 52%);
+				background-image: -moz-linear-gradient(bottom, rgb(31,67,105) 4%, rgb(36,96,133) 52%);
+				background-image: -webkit-linear-gradient(bottom, rgb(31,67,105) 4%, rgb(36,96,133) 52%);
+				background-image: -ms-linear-gradient(bottom, rgb(31,67,105) 4%, rgb(36,96,133) 52%);
+				box-shadow:0px 1px 1px #3d89db inset;
+				position:absolute;
+				top:0px;
+				left:0px;
+				z-index: 9999;
+			}
+			header img{
+				float:left;
+				padding:15px;
+			}
+			header p{
+				font-size:20px;
+				color:#fff;
+				font-family: Arial;
+				padding:14px;
+				margin:0px;
+				text-align:center;
+			}
+			header button{
+				width:120px;
+				height:70px;
+				position:absolute;
+				right:10px;
+				top:18px;
+				font-size:30px;
+				background:#658a00;
+				border:1px solid #000;
+				border-radius:10px;
+				box-shadow: 0px 2px 1px #96cc00 inset, 0px 2px 1px #555;
+				color:#fff;
+				background-image: linear-gradient(bottom, rgb(87,117,5) 27%, rgb(101,138,0) 70%);
+				background-image: -o-linear-gradient(bottom, rgb(87,117,5) 27%, rgb(101,138,0) 70%);
+				background-image: -moz-linear-gradient(bottom, rgb(87,117,5) 27%, rgb(101,138,0) 70%);
+				background-image: -webkit-linear-gradient(bottom, rgb(87,117,5) 27%, rgb(101,138,0) 70%);
+				background-image: -ms-linear-gradient(bottom, rgb(87,117,5) 27%, rgb(101,138,0) 70%);
+				text-shadow:2px 2px 2px #476100;
+			}
+			footer{
+				position:fixed;
+				bottom:0px;
+				left:0px;
+				height:80px;
+				width:100%;
+				background: #000;
+				opacity: 0.8;
+			}
+			footer p{
+				font-size:30px;
+				color:#fff;
+				font-family: Arial;
+				padding:25px;
+				margin:0px;
+				text-align:center;
+			}
+			#zoom-buttons{
+				position:fixed;
+				bottom: 100px;
+				right: 10px;
+			}
+			
+			.zoomInAnim{
+				animation: zoomin 0.5s;
+				-webkit-animation: zoomin 0.5s;
+				transform: scale(2,2);
+				-webkit-transform: scale(2,2);
+			}
+			
+			@keyframes zoomin{
+				from { transform: scale(1,1); }
+				to { transform: scale(2,2); }
+			}
+			
+			@-webkit-keyframes zoomin{
+				from { -webkit-transform: scale(1,1); }
+				to { -webkit-transform: scale(2,2); }
+			}
+			
+			.zoomOutAnim{
+				animation: zoomout 0.5s;
+				-webkit-animation: zoomout 0.5s;
+				transform: scale(1,1);
+				-webkit-transform: scale(1,1);
+			}
+			
+			@keyframes zoomout{
+				from { transform: scale(2,2); }
+				to { transform: scale(1,1); }
+			}
+			
+			@-webkit-keyframes zoomout{
+				from { -webkit-transform: scale(2,2); }
+				to { -webkit-transform: scale(1,1); }
+			}
+			
+			#canvas-container{
+				overflow: auto;
+			}
+			
+			#zoomin-button, #zoomout-button{
+				-webkit-tap-highlight-color:transparent;
+			}
+		</style>
+		
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+    </head>
+    <body>
+		<header>
+			<p>Harita</p>
+		</header>
+		<div id="page-content">
+			<div id="page-content-in">
+				<div id="canvas-container">
+					<canvas id="myCanvas">
+						Your browser does not support the HTML5 canvas tag.
+					</canvas>
+				</div>
+				<div id="zoom-buttons">
+					<img src="img/location.png" style="margin-right:20px" />
+					<img src="img/zoomin.png" style="margin-right:20px" id="zoomin-button" />
+					<img src="img/zoomout.png" id="zoomout-button" />
+				</div>
+				<footer>
+					<p id="info">Watching position...</p>
+				</footer>
+			</div>
+		</div>
+        
+		<script type="text/javascript" src="cordova-2.5.0.js"></script>
+        
+		<script type="text/javascript">
+		
+		var startLatitude = 41.091127;
+		var startLongitude = 28.999596;
+		
+		var latitudePerPx = 0.00000266;
+		var longitudePerPx = 0.00000202;
+		
+		var moveToX = 0;
+		var moveToY = 0;
+		
+		var lineToX = 0;
+		var lineToY = 0;
+		
+		var c=document.getElementById("myCanvas");
+		var ctx=c.getContext("2d");
+		
+		c.width = 1213;
+		c.height = 1527;
+		
+		document.addEventListener("deviceready", onDeviceReady, false);
+
+		var watchID = null;
+
+		function onDeviceReady() {
+			document.addEventListener("pause", onPause, false);
+		
+			var options = { timeout: 30000, maximumAge: 3000, enableHighAccuracy: true };
+			watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+		}
+		
+		function onPause() {
+			navigator.geolocation.clearWatch(watchID);
+		}
+		
+		var dot = new Image();
+		
+		dot.src = "img/asd.png";
+
+		function onSuccess(position) {
+			/*var element = document.getElementById('geolocation');
+			element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+								'Longitude: ' + position.coords.longitude     + '<br />' +
+								'<hr />'      + element.innerHTML;
+			*/
+			
+			var latDif = Math.abs(startLatitude - position.coords.latitude);
+			var longDif = Math.abs(startLongitude - position.coords.longitude);
+			
+			var posX = longDif / latitudePerPx;
+			var posY = latDif / longitudePerPx;
+			
+			var element = document.getElementById('info');
+			element.innerHTML = 'Watching position... Accuracy: ' + position.coords.accuracy;
+			
+			
+			if(moveToX == 0) moveToX = posX;
+			if(moveToX == 0) moveToY = posY;
+			
+			if(position.coords.accuracy < 12)
+			{
+			/*
+				ctx.beginPath();
+				ctx.moveTo(posX,posY);
+				ctx.lineTo(70,66);
+				ctx.lineTo(103,76);
+				ctx.lineTo(170,15);
+				ctx.lineWidth = 5;
+				ctx.strokeStyle = "red";
+				ctx.stroke();
+				*/
+				
+				ctx.drawImage(dot, posX, posY);
+				
+				
+				
+			}
+		}
+		
+		
+		
+		function onError(error) {
+			alert('code: '    + error.code    + '\n' +
+				  'message: ' + error.message + '\n');
+		}
+		
+		var img = new Image();
+		
+		img.onload = function()
+		{
+			ctx.drawImage(img, 0, 0);
+			
+		}
+		
+		img.src = "img/background3.png";
+
+		// Make sure the image is loaded first otherwise nothing will draw.
+		
+		
+		</script>
+    </body>
+</html>

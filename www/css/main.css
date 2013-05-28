@@ -1,0 +1,275 @@
+body{
+	padding:0;
+	margin:0;
+	font-family: Arial;
+}
+#main-container{
+	width:100%;
+	height:100%;
+	position:relative;
+	overflow:hidden;
+}
+
+#app-menu{
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:250px;
+	height:500px;
+	z-index:1000;
+	background:#333;
+	overflow-y:auto;
+}
+
+#app-menu-cover{
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:500px;
+	height:500px;
+	z-index:1200;
+	overflow-y:auto;
+}
+
+#app-menu-list{
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+#app-menu-list li{
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:10px;
+	border-bottom:1px solid #444;
+	box-shadow:0px -1px 1px #222 inset;
+	color:#ccc;
+	font-size:20px;
+	-webkit-tap-highlight-color:transparent;
+	-webkit-user-select:none;
+	-webkit-touch-callout:none;
+}
+
+#page{
+	position:absolute;
+	top:0px;
+	height:1000px;
+	width:500px;
+	z-index:2000;
+	/*box-shadow:-4px 0px 15px #000;*/
+}
+
+header{
+	width:100%;
+	height:50px;
+	background-image: linear-gradient(bottom, rgb(0,0,0) 14%, rgb(36,36,36) 57%);
+	background-image: -o-linear-gradient(bottom, rgb(0,0,0) 14%, rgb(36,36,36) 57%);
+	background-image: -moz-linear-gradient(bottom, rgb(0,0,0) 14%, rgb(36,36,36) 57%);
+	background-image: -webkit-linear-gradient(bottom, rgb(0,0,0) 14%, rgb(36,36,36) 57%);
+	background-image: -ms-linear-gradient(bottom, rgb(0,0,0) 14%, rgb(36,36,36) 57%);
+	box-shadow:0px 1px 1px #333 inset;
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index: 9999;
+}
+header img{
+	float:left;
+}
+header p{
+	font-size:20px;
+	color:#fff;
+	font-family: Arial;
+	padding:14px;
+	margin:0px;
+	text-align:center;
+}
+#page-content{
+	width: inherit;
+	position:relative;
+	padding-top:50px;
+	background:#fff;
+}
+
+#page-content-in{
+	width:inherit;
+	position:absolute;
+	top:0px;
+	left:0px;
+
+}
+
+#page-content-in2{
+	width:inherit;
+	position:absolute;
+	top:0px;
+	left:0px;
+
+}
+
+#open-app-menu-button{
+	width:46px;
+	height:50px;
+	border-right:1px solid #333;
+	position:absolute;
+	top:0px;
+	left:0px;
+	-webkit-tap-highlight-color:transparent;
+	-webkit-user-select:none;
+	-webkit-touch-callout:none;
+	box-shadow:1px 0px 1px #000;
+}
+
+.app-menu-list-li-label{
+	display:block;
+	height:30px;
+	float:left;
+	line-height:30px;
+	margin-left:10px;
+}
+
+.app-menu-list-li-img{
+	float:left;
+}
+
+.pageMenuOpenAnim{
+	-webkit-transition : all 0.3s ease-in-out;
+	-webkit-transform : translate(250px, 0);
+}
+
+.pageMenuCloseAnim2{
+	-webkit-transform : translate(0, 0);
+}
+
+.pageMenuCloseAnim{
+	-webkit-transition : all 0.3s ease-in-out;
+	-webkit-transform : translate(0, 0);
+}
+
+@-webkit-keyframes pageOnMenuOpen{
+	from { left:0px; }
+	to { left:500px; }
+}
+
+@-webkit-keyframes pageOnMenuClose{
+	from { left:500px; }
+	to { left:0px; }
+}
+
+#content-in{
+	height: inherit;
+}
+
+footer{
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	height:50px;
+	width:100%;
+	background: #000;
+	opacity: 0.8;
+}
+footer p{
+	font-size:15px;
+	color:#fff;
+	font-family: Arial;
+	padding:15px;
+	margin:0px;
+	text-align:center;
+}
+#zoom-buttons{
+	position:absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.zoomInAnim{
+	animation: zoomin 0.1s;
+	-webkit-animation: zoomin 0.1s;
+	transform: scale(2,2);
+	-webkit-transform: scale(2,2);
+	background:#000;
+}
+
+@keyframes zoomin{
+	from { transform: scale(1,1); }
+	to { transform: scale(2,2); }
+}
+
+@-webkit-keyframes zoomin{
+	from { -webkit-transform: scale(1,1); }
+	to { -webkit-transform: scale(2,2); }
+}
+
+.zoomOutAnim{
+	animation: zoomout 0.1s;
+	-webkit-animation: zoomout 0.1s;
+	transform: scale(1,1);
+	-webkit-transform: scale(1,1);
+}
+
+@keyframes zoomout{
+	from { transform: scale(1,1); }
+	to { transform: scale(0.5,0.5); }
+}
+
+@-webkit-keyframes zoomout{
+	from { -webkit-transform: scale(1,1); }
+	to { -webkit-transform: scale(0.5,0.5); }
+}
+
+#canvas-container{
+	
+}
+
+#zoomin-button, #zoomout-button{
+	-webkit-tap-highlight-color:transparent;
+}
+
+.page-loading-img{
+	position:absolute;
+	top:0px;
+	left:0px;
+	opacity:0.6;
+}
+
+#map-html{
+	display:none;
+}
+
+#map-container{
+	width:inherit;
+	height:inherit;
+	overflow:auto;
+}
+
+.text{
+	font-size:20px;
+	color:#999;
+	padding-left: 10px;
+}
+
+.page-frame{
+	width:inherit;
+	margin:10px;
+	background:#f1f1f1;
+	border:1px solid #ccc;
+	border-radius:5px;
+}
+
+.page-frame p{
+	padding:10px;
+}
+
+input[type='range'] {  
+	-webkit-appearance: none;
+	background:url(img/range_bg.png) repeat-x;
+	-webkit-tap-highlight-color:transparent;
+}  
+  
+input[type='range']::-webkit-slider-thumb {  
+	-webkit-appearance: none;  
+	background: url(img/range_thumb_bg.png) repeat-x;  
+	width: 30px;  
+	height: 50px;
+	-webkit-tap-highlight-color:transparent;
+}

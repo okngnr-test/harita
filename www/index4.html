@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=320, target-densitydpi=medium-dpi" />
+        
+        <title>Hello World</title>
+		<link rel="stylesheet" href="js/jquery.svg.css">
+
+		<style type="text/css">
+			body{
+				padding:0;
+				padding-top:0px;
+				margin:0;
+				background:#cadfaa;
+			}
+			header{
+				width:100%;
+				height:50px;
+				background-image: linear-gradient(bottom, rgb(31,67,105) 4%, rgb(36,96,133) 52%);
+				background-image: -o-linear-gradient(bottom, rgb(31,67,105) 4%, rgb(36,96,133) 52%);
+				background-image: -moz-linear-gradient(bottom, rgb(31,67,105) 4%, rgb(36,96,133) 52%);
+				background-image: -webkit-linear-gradient(bottom, rgb(31,67,105) 4%, rgb(36,96,133) 52%);
+				background-image: -ms-linear-gradient(bottom, rgb(31,67,105) 4%, rgb(36,96,133) 52%);
+				box-shadow:0px 1px 1px #3d89db inset;
+				position:absolute;
+				top:0px;
+				left:0px;
+				z-index: 9999;
+			}
+			header img{
+				float:left;
+				padding:15px;
+			}
+			header p{
+				font-size:20px;
+				color:#fff;
+				font-family: Arial;
+				padding:14px;
+				margin:0px;
+				text-align:center;
+			}
+			header button{
+				width:120px;
+				height:70px;
+				position:absolute;
+				right:10px;
+				top:18px;
+				font-size:30px;
+				background:#658a00;
+				border:1px solid #000;
+				border-radius:10px;
+				box-shadow: 0px 2px 1px #96cc00 inset, 0px 2px 1px #555;
+				color:#fff;
+				background-image: linear-gradient(bottom, rgb(87,117,5) 27%, rgb(101,138,0) 70%);
+				background-image: -o-linear-gradient(bottom, rgb(87,117,5) 27%, rgb(101,138,0) 70%);
+				background-image: -moz-linear-gradient(bottom, rgb(87,117,5) 27%, rgb(101,138,0) 70%);
+				background-image: -webkit-linear-gradient(bottom, rgb(87,117,5) 27%, rgb(101,138,0) 70%);
+				background-image: -ms-linear-gradient(bottom, rgb(87,117,5) 27%, rgb(101,138,0) 70%);
+				text-shadow:2px 2px 2px #476100;
+			}
+			footer{
+				position:fixed;
+				bottom:0px;
+				left:0px;
+				height:80px;
+				width:100%;
+				background: #000;
+				opacity: 0.8;
+			}
+			footer p{
+				font-size:30px;
+				color:#fff;
+				font-family: Arial;
+				padding:25px;
+				margin:0px;
+				text-align:center;
+			}
+			#zoom-buttons{
+				position:fixed;
+				bottom: 100px;
+				right: 10px;
+			}
+			.beforeZoomInAnim{
+				transform: scale(0.5,0.5);
+				-webkit-transform: scale(0.5,0.5);
+				-webkit-transform-origin: center;
+				-moz-transform-origin: center;
+				-o-transform-origin: center;
+			}
+			.zoomInAnim{
+				animation: zoomin 0.3s;
+				-webkit-animation: zoomin 0.3s;
+				transform: scale(2,2);
+				-webkit-transform: scale(2,2);
+				-webkit-transform-origin: center;
+				-moz-transform-origin: center;
+				-o-transform-origin: center;
+				animation-direction:alternate;
+			}
+			
+			@keyframes zoomin{
+				from { transform: scale(1,1); }
+				to { transform: scale(2,2); }
+			}
+			
+			@-webkit-keyframes zoomin{
+				from { -webkit-transform: scale(1,1); }
+				to { -webkit-transform: scale(2,2); }
+			}
+			
+			.zoomOutAnim{
+				animation: zoomout 0.3s;
+				-webkit-animation: zoomout 0.3s;
+				transform: scale(0.50,0.50);
+				-webkit-transform: scale(0.50,0.50);
+				-webkit-transform-origin: center;
+				-moz-transform-origin: center;
+				-o-transform-origin: center;
+				animation-direction:alternate;
+			}
+			
+			@keyframes zoomout{
+				from { transform: scale(1,1); }
+				to { transform: scale(0.50,0.50); }
+			}
+			
+			@-webkit-keyframes zoomout{
+				from { -webkit-transform: scale(1,1); }
+				to { -webkit-transform: scale(0.50,0.50); }
+			}
+			
+			#canvas-container{
+				overflow: auto;
+			}
+			
+			#zoomin-button, #zoomout-button{
+				-webkit-tap-highlight-color:transparent;
+			}
+			#buttons{
+				position:fixed;
+				top:0px;
+			}
+			#map-container{
+				width:100%;
+				height:inherit;
+			}
+			
+			
+		</style>
+		
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.svg.min.js"></script>
+		<script type="text/javascript" src="js/jquery.svganim.min.js"></script>
+		<script type="text/javascript" src="js/main2.js"></script>
+    </head>
+    <body>
+		<div id="buttons">
+			<button id="zoomInButton">Zoom In</button>
+			<button id="zoomOutButton">Zoom Out</button>
+		</div>
+		<div id="map-container">
+		
+		</div>
+        
+		<script type="text/javascript" src="cordova-2.5.0.js"></script>
+    </body>
+</html>
